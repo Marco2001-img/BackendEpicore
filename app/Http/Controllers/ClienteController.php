@@ -29,7 +29,7 @@ class ClienteController extends Controller
             'password' => Hash::make($validatedData['password']),
         ]);
 
-         $token = $user->createToken('auth_token')->plainTextToken;
+        $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
             'message' => 'Usuario registrado exitosamente',
@@ -67,5 +67,4 @@ class ClienteController extends Controller
     //             'admin' => $cliente]
     //             , 200);
     // }
-  
 }
