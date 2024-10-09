@@ -11,36 +11,31 @@ class AuthAgenteController extends Controller
 {
     public function login(Request $request)
     {
-        // Validar datos de entrada
-        $credentials = $request->validate([
+        $request->validate([
             'email' => 'required|string|email',
             'password' => 'required|string',
+        ], [
+            'email.required' => 'El correo es obligatorio',
+            'email.email' => 'El correo debe ser un correo valido',
+            'password.required' => 'La contraseña es obligatoria',
         ]);
 
-        // Intentar autenticación
-        if (!Auth::attempt($credentials)) {
+            $agente = Agente::where('email', $request->email)->first();
+
+
+            if (!$agente || ! Hash::check($request->password, $agente->password)) {
+                return response()->json(['message' => 'Las credenciales no coinciden'], 401);
+            }
+
+            // if ($agente->estatus == 0) {
+            //     return response()->json(['message' => 'Usuario inactivo'], 401);
+            // }
+
+            $token = $agente->createToken('token-name')->plainTextToken;
             return response()->json([
-                'message' => 'Credenciales incorrectas'
-            ], 401);
-        }
-
-        // Obtener usuario autenticado
-        $user = Agente::where('email', $request['email'])->firstOrFail();
-
-        // Verificar contraseña
-        if (!Hash::check($request->password, $user->password)) {
-            return response()->json([
-                'message' => 'Contraseña incorrecta'
-            ], 401);
-        }
-
-        // Generar token personal
-        $token = $user->createToken('auth_token')->plainTextToken;
-
-        return response()->json([
-            'message' => 'Inicio de sesión exitoso',
-            'access_token' => $token,
-            'token_type' => 'Bearer',
-        ], 200);
+                'message' => 'Inicio de sesion exitoso',
+                'token' => $token,
+                'admin' => $agente]
+                , 200);
     }
 }

@@ -38,27 +38,34 @@ class ClienteController extends Controller
         ], 201);
     }
         
-    public function login(Request $request)
-    {
-        $credentials = $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
-        ]);
+    // public function login(Request $request)
+    // {
+    //     $request->validate([
+    //         'email' => 'required|string|email',
+    //         'password' => 'required|string',
+    //     ], [
+    //         'email.required' => 'El correo es obligatorio',
+    //         'email.email' => 'El correo debe ser un correo valido',
+    //         'password.required' => 'La contraseña es obligatoria',
+    //     ]);
 
-        // Intentar autenticación
-        if (!Auth::attempt($credentials)) {
-            return response()->json([
-                'message' => 'Credenciales incorrectas'
-            ], 401);
-        }
+    //         $cliente = Cliente::where('email', $request->email)->first();
 
-        $user = Cliente::where('email', $request['email'])->firstOrFail();
 
-       if (!Hash::check($request->password, $user->password)) {
-            return response()->json([
-                'message' => 'Contraseña incorrecta'
-            ], 401);
-        }
-    }
+    //         if (!$cliente || ! Hash::check($request->password, $cliente->password)) {
+    //             return response()->json(['message' => 'Las credenciales no coinciden'], 401);
+    //         }
+
+    //         // if ($agente->estatus == 0) {
+    //         //     return response()->json(['message' => 'Usuario inactivo'], 401);
+    //         // }
+
+    //         $token = $cliente->createToken('token-name')->plainTextToken;
+    //         return response()->json([
+    //             'message' => 'Inicio de sesion exitoso',
+    //             'token' => $token,
+    //             'admin' => $cliente]
+    //             , 200);
+    // }
   
 }
