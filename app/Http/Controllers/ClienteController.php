@@ -67,4 +67,6 @@ class ClienteController extends Controller
     //             'admin' => $cliente]
     //             , 200);
     // }
+
+    
 }

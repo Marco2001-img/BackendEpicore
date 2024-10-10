@@ -11,3 +11,14 @@
 - cliente
 - admin
 - Agente
+
+## CRUD
+- ADMIN
+- AGENTE
+- CLIENTE
+- DEPARTAMENTO
+- GRUPO
+- MENSAJE
+- SEDE
+- TICKET
+- TIPOTICKET
