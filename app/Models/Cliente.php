@@ -4,38 +4,32 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Sanctum\HasApiTokens;
 
 class Cliente extends Model
 {
     use HasFactory,HasApiTokens;
 
-       /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    protected $table = 'clientes';
+    protected $primaryKey = 'id';
+    protected $guard_name = 'clientes';
     protected $fillable = [
-        'name',
+        // 'icono',
+        'nombre_completo',
+        'nombre_corto',
+        'telefono',
         'email',
         'password',
+        'observaciones',
+        'estatus',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
@@ -43,4 +37,14 @@ class Cliente extends Model
             'password' => 'hashed',
         ];
     }
+
+    public function tickets(): HasMany
+    {
+        return $this->hasMany(Ticket::class, 'id_cliente');
+    }
+
+    // public function sendPasswordResetNotification($token)
+    // {
+    //     $this->notify(new CustomResetPasswordNotification($token));
+    // }
 }
