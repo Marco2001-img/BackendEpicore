@@ -8,15 +8,21 @@ use Illuminate\Support\Facades\Password;
 
 class RecuperarController extends Controller
 {
-    public function store (Request $request) {
+    public function sendResetLink(Request $request)
+    {
         $request->validate(['email' => 'required|email']);
-    
-        $status = Password::sendResetLink(
-            $request->only('email')
-        );
-    
+
+        $status = Password::sendResetLink($request->only('email'));
+
+       
+
         return $status === Password::RESET_LINK_SENT
-                    ? response()->json(['message' => __($status)])
-                    : response()->json(['message' => __($status)], 400);
+            ? response()->json(['message' => __($status)])
+            : response()->json(['message' => __($status)], 400);
+    }
+
+        public function index()
+        {
+            dd("hola");
         }
 }

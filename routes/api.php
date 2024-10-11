@@ -11,11 +11,13 @@ use App\Http\Controllers\DepartamentoController;
 use App\Http\Controllers\GrupoController;
 use App\Http\Controllers\MensajeController;
 use App\Http\Controllers\PasswordResetController;
+use App\Http\Controllers\RecuperarController;
 use App\Http\Controllers\SedeController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\TipoTicketController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Laravel\Fortify\Fortify;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -103,5 +105,7 @@ Route::delete('/eliminarTipoTicket/{id}', [TipoTicketController::class, 'destroy
 
 /*************Resetear Contraseña********** */
 Route::post('/password/reset', [PasswordResetController::class, 'reset'])->name('password.reset');
+Route::post('/forgot-password', [RecuperarController::class, 'sendResetLink']);
+Route::get('/recuperar',[RecuperarController::class, 'index']);
 
 

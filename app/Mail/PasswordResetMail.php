@@ -1,20 +1,24 @@
 <?php
 
-namespace App\Notifications;
+namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Notification;
+use Illuminate\Queue\SerializesModels;
 
-class PasswordResetNotification extends Notification
+class PasswordResetMail extends Mailable
 {
-    use Queueable;
+    use Queueable, SerializesModels;
 
     private $token;
 
+
     /**
-     * Create a new notification instance.
+     * Create a new message instance.
      */
     public function __construct($token)
     {
@@ -22,18 +26,25 @@ class PasswordResetNotification extends Notification
     }
 
     /**
-     * Get the notification's delivery channels.
-     *
-     * @return array<int, string>
+     * Get the message envelope.
      */
-    public function via( $notifiable)
+    public function envelope(): Envelope
     {
-        return ['mail'];
+        return new Envelope(
+            subject: 'Password Reset Mail',
+        );
     }
 
     /**
-     * Get the mail representation of the notification.
+     * Get the message content definition.
      */
+    public function content(): Content
+    {
+        return new Content(
+            view: 'view.name',
+        );
+    }
+
     public function toMail( $notifiable)
     {
         $frontendUrl = env('FRONTEND_URL', 'http://localhost:5173/'); // Usa la URL de tu frontend
@@ -44,15 +55,16 @@ class PasswordResetNotification extends Notification
                     ->line('Estás recibiendo este correo porque solicitaste un restablecimiento de contraseña.')
                     ->action('Notification Action', $url);
     }
+
+   
+
     /**
-     * Get the array representation of the notification.
+     * Get the attachments for the message.
      *
-     * @return array<string, mixed>
+     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
      */
-    public function toArray(object $notifiable): array
+    public function attachments(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 }
