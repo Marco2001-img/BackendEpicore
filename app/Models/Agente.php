@@ -20,7 +20,7 @@ class Agente extends Model
     protected $fillable =[
         'id_departamento',
         'id_grupo',
-        // 'icono',
+        'icono',
         'nombre',
         'email',
         'password',

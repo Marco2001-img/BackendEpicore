@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             AdminSeeder::class,
+            Tipo_ticketSeeder::class
             // AgenteSeeder::class,
             // ClienteSeeder::class
         ]);
