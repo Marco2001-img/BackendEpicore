@@ -22,3 +22,5 @@
 - SEDE
 - TICKET
 - TIPOTICKET
+
+## Restablecer contraseña fortify

@@ -10,6 +10,7 @@ use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\DepartamentoController;
 use App\Http\Controllers\GrupoController;
 use App\Http\Controllers\MensajeController;
+use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\SedeController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\TipoTicketController;
@@ -99,4 +100,8 @@ Route::post('/crearTipoTicket', [TipoTicketController::class, 'store']);
 Route::put('/modificarTipoTicket/{id}', [TipoTicketController::class, 'update']);
 Route::get('/buscarTipoTicket/{id}', [TipoTicketController::class, 'show']);
 Route::delete('/eliminarTipoTicket/{id}', [TipoTicketController::class, 'destroy']);
+
+/*************Resetear Contraseña********** */
+Route::post('/password/reset', [PasswordResetController::class, 'reset'])->name('password.reset');
+
 
