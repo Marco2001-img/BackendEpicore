@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
-    
+
     public function index()
     {
         try {
@@ -27,7 +28,7 @@ class AdminController extends Controller
         }
     }
 
-    
+
     public function store(Request $request)
     {
         $request->validate([
@@ -58,13 +59,13 @@ class AdminController extends Controller
             return response()->json(['message' => 'Error al obtener el admin', 'error' => $e->getMessage()], 500);
         }
     }
-    
+
     public function update(Request $request, $id)
     {
         try {
             $admin = Admin::findOrFail($id);
             $admin->update($request->all());
-            
+
             return response()->json($admin, 200);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Error al actualizar el admin', 'error' => $e->getMessage()], 500);
@@ -82,6 +83,21 @@ class AdminController extends Controller
             return response()->json(['message' => 'Admin eliminado con exito'], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Error al eliminar el admin', 'error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function session()
+    {
+        try {
+            $admin = Auth::user();
+
+            if (!$admin) {
+                return response()->json(['message' => 'No hay usuario autenticado'], 404);
+            }
+
+            return response()->json($admin, 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Error al crear el token', 'error' => $e->getMessage()], 500);
         }
     }
 }

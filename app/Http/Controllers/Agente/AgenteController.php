@@ -6,10 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Agente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AgenteController extends Controller
 {
-    
+
     public function index()
     {
         try{
@@ -71,7 +72,7 @@ class AgenteController extends Controller
         }
     }
 
-    
+
     public function destroy($id)
     {
         try{
@@ -85,6 +86,21 @@ class AgenteController extends Controller
             return response()->json([
                 'message' => 'Error al eliminar agente', 'error' =>$e->getMessage()
             ],500);
+        }
+    }
+
+    public function session()
+    {
+        try {
+            $agente = Auth::user();
+
+            if (!$agente) {
+                return response()->json(['message' => 'No hay usuario autenticado'], 404);
+            }
+
+            return response()->json($agente, 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Error al crear el token', 'error' => $e->getMessage()], 500);
         }
     }
 }

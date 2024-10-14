@@ -12,7 +12,6 @@ use App\Http\Controllers\Admin\Sede\SedeController;
 use App\Http\Controllers\Cliente\ClienteController;
 use App\Http\Controllers\Ticket\TicketController;
 use App\Http\Controllers\TipoTicketController;
-use App\Models\Cliente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +24,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/login', [AuthAdminController::class, 'login']);
 
     Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/session', [AdminController::class, 'session']);
     Route::get('/', [AdminController::class, 'index']);
     Route::post('/', [AdminController::class, 'store']);
     Route::get('/{id}', [AdminController::class, 'show']);
@@ -37,6 +37,7 @@ Route::prefix('agente')->group(function () {
     Route::post('/login', [AuthAgenteController::class, 'login']);
 
     Route::middleware('auth:sanctum')->group(function () {
+        Route::get('/session', [AgenteController::class, 'session']);
         Route::get('/', [AgenteController::class, 'index']);
         Route::post('/', [AgenteController::class, 'store']);
         Route::get('/{id}', [AgenteController::class, 'show']);
@@ -49,6 +50,7 @@ Route::prefix('cliente')->group(function () {
     Route::post('/login', [AuthClienteController::class, 'login']);
 
     Route::middleware('auth:sanctum')->group(function () {
+        Route::get('/session', [ClienteController::class, 'session']);
         Route::get('/', [ClienteController::class, 'index']);
         Route::post('/', [ClienteController::class, 'store']);
         Route::get('/{id}', [ClienteController::class, 'show']);
@@ -99,14 +101,14 @@ Route::prefix('tickets')->group(function () {
 /**********************************************************/
 
 
-Route::get('/TodosMensajes', [MensajeController::class, 'index']); 
+Route::get('/TodosMensajes', [MensajeController::class, 'index']);
 Route::post('/crearMensajes', [MensajeController::class, 'store']);
 Route::put('/modificarMensajes/{id}', [MensajeController::class, 'update']);
 Route::get('/buscarMensaje/{id}', [MensajeController::class, 'show']);
 Route::delete('/eliminarMensajes/{id}', [MensajeController::class, 'destroy']);
 
 
-Route::get('/TodosTipoTicket', [TipoTicketController::class, 'index']); 
+Route::get('/TodosTipoTicket', [TipoTicketController::class, 'index']);
 Route::post('/crearTipoTicket', [TipoTicketController::class, 'store']);
 Route::put('/modificarTipoTicket/{id}', [TipoTicketController::class, 'update']);
 Route::get('/buscarTipoTicket/{id}', [TipoTicketController::class, 'show']);

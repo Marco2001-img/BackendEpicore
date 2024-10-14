@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('nombre')->nullable(false);
             $table->string('email')->unique()->nullable(false);
             $table->string('password')->nullable(false);
-            $table->integer('telefono')->unique()->nullable(false);
+            $table->string('telefono')->unique()->nullable(false);
             $table->enum('estado_agente', ['activo','inactivo','no_disponible'])->default('activo')->nullable(false);
             $table->boolean('estatus')->default(1)->nullable(false);
 

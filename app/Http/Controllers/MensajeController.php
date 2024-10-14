@@ -7,17 +7,14 @@ use Illuminate\Http\Request;
 
 class MensajeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        return Mensaje::all();
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // public function index()
+    // {
+    //     $mensaje = Mensaje::with('emisor')->get(); // Incluye el emisor
+    //     return response()->json($mensaje);
+    // }
+
+
     public function store(Request $request)
     {
         $request->validate([
@@ -37,32 +34,19 @@ class MensajeController extends Controller
         return response()->json($post, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show( $id)
     {
-        return Mensaje::findOrFail($id);
+
     }
 
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, $id)
     {
-        $post = Mensaje::findOrFail($id);
-        $post->update($request->all());
 
-        return response()->json($post, 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(string $id)
     {
-        Mensaje::destroy($id);
-        return response()->json(null, 204);
+
     }
 }

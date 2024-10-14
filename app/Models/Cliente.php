@@ -43,6 +43,7 @@ class Cliente extends Model
         return $this->hasMany(Ticket::class, 'id_cliente');
     }
 
+    
     // public function sendPasswordResetNotification($token)
     // {
     //     $this->notify(new CustomResetPasswordNotification($token));

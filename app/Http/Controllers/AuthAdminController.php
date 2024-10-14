@@ -9,24 +9,6 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthAdminController extends Controller
 {
-//     public function register(Request $request)
-// {
-//     // Crear usuario con la contraseña encriptada
-//     $user = Admin::create([
-//         'name' => $request->name,
-//         'email' => $request->email,
-//         'password' => Hash::make($request->password),
-//     ]);
-
-//     // Generar token personal
-//     $token = $user->createToken('auth_token')->plainTextToken;
-
-//     return response()->json([
-//         'message' => 'Usuario registrado exitosamente',
-//         'access_token' => $token,
-//         'token_type' => 'Bearer',
-//     ], 201);
-// }
 
 public function login(Request $request)
     {

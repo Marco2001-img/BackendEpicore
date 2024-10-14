@@ -36,11 +36,44 @@ return [
     */
 
     'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
+    'web' => [
+        'driver' => 'session',
+        'provider' => 'users',
     ],
+
+    'admin' => [
+        'driver' => 'session',
+        'provider' => 'admins',
+    ],
+
+    'agentes' => [
+        'driver' => 'session',
+        'provider' => 'agentes',
+    ],
+
+    'clientes' => [
+        'driver' => 'session',
+        'provider' => 'clientes',
+    ],
+
+    'api-admin' => [
+        'driver' => 'token',
+        'provider' => 'admins',
+        'hash' => false,
+    ],
+
+    'api-agentes' => [
+        'driver' => 'token',
+        'provider' => 'agentes',
+        'hash' => false,
+    ],
+
+    'api-clientes' => [
+        'driver' => 'token',
+        'provider' => 'clientes',
+        'hash' => false,
+    ],
+],
 
     /*
     |--------------------------------------------------------------------------
@@ -60,10 +93,26 @@ return [
     */
 
     'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
-        ],
+    'users' => [
+        'driver' => 'eloquent',
+        'model' => env('AUTH_MODEL', App\Models\User::class),
+    ],
+
+    'admins' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Admin::class,
+    ],
+
+    'agentes' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Agente::class,
+    ],
+
+    'clientes' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Cliente::class,
+    ],
+
 
         // 'users' => [
         //     'driver' => 'database',
