@@ -12,7 +12,6 @@ use App\Http\Controllers\Admin\Sede\SedeController;
 use App\Http\Controllers\Cliente\ClienteController;
 use App\Http\Controllers\Ticket\TicketController;
 use App\Http\Controllers\TipoTicketController;
-use App\Models\Cliente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,77 +23,76 @@ Route::get('/user', function (Request $request) {
 Route::prefix('admin')->group(function () {
     Route::post('/login', [AuthAdminController::class, 'login']);
 
-    Route::middleware('auth:sanctum')->group(function () {
+
     Route::get('/', [AdminController::class, 'index']);
     Route::post('/', [AdminController::class, 'store']);
     Route::get('/{id}', [AdminController::class, 'show']);
     Route::put('/{id}', [AdminController::class, 'update']);
     Route::delete('/{id}', [AdminController::class, 'destroy']);
-    });
+
 });
 
 Route::prefix('agente')->group(function () {
     Route::post('/login', [AuthAgenteController::class, 'login']);
 
-    Route::middleware('auth:sanctum')->group(function () {
         Route::get('/', [AgenteController::class, 'index']);
         Route::post('/', [AgenteController::class, 'store']);
         Route::get('/{id}', [AgenteController::class, 'show']);
         Route::put('/{id}', [AgenteController::class, 'update']);
         Route::delete('/{id}', [AgenteController::class, 'destroy']);
-    });
+
 });
 
 Route::prefix('cliente')->group(function () {
     Route::post('/login', [AuthClienteController::class, 'login']);
 
-    Route::middleware('auth:sanctum')->group(function () {
+
         Route::get('/', [ClienteController::class, 'index']);
         Route::post('/', [ClienteController::class, 'store']);
         Route::get('/{id}', [ClienteController::class, 'show']);
         Route::put('/{id}', [ClienteController::class, 'update']);
         Route::delete('/{id}', [ClienteController::class, 'destroy']);
-    });
+
 });
 
 Route::prefix('grupos')->group(function () {
-    Route::middleware('auth:sanctum')->group(function () {
+
         Route::get('/', [GrupoController::class, 'index']);
         Route::post('/', [GrupoController::class, 'store']);
         Route::get('/{id}', [GrupoController::class, 'show']);
         Route::put('/{id}', [GrupoController::class, 'update']);
         Route::delete('/{id}', [GrupoController::class, 'destroy']);
-    });
+
 });
 
 Route::prefix('sedes')->group(function () {
-    Route::middleware('auth:sanctum')->group(function () {
+
         Route::get('/', [SedeController::class, 'index']);
         Route::post('/', [SedeController::class, 'store']);
         Route::get('/{id}', [SedeController::class, 'show']);
         Route::put('/{id}', [SedeController::class, 'update']);
         Route::delete('/{id}', [SedeController::class, 'destroy']);
-    });
+
 });
 
 Route::prefix('departamentos')->group(function () {
-    Route::middleware('auth:sanctum')->group(function () {
+
         Route::get('/', [DepartamentoController::class, 'index']);
         Route::post('/', [DepartamentoController::class, 'store']);
         Route::get('/{id}', [DepartamentoController::class, 'show']);
         Route::put('/{id}', [DepartamentoController::class, 'update']);
         Route::delete('/{id}', [DepartamentoController::class, 'destroy']);
-    });
+
 });
 
 Route::prefix('tickets')->group(function () {
-    Route::middleware('auth:sanctum')->group(function () {
+
         Route::get('/', [TicketController::class, 'index']);
         Route::post('/', [TicketController::class, 'store']);
         Route::get('/{id}', [TicketController::class, 'show']);
         Route::put('/{id}', [TicketController::class, 'update']);
         Route::delete('/{id}', [TicketController::class, 'destroy']);
-    });
+
 });
 /**********************************************************/
 
