@@ -43,7 +43,7 @@ class SedeController extends Controller
     {
         try{
             $sede = Sede::FindOrFail($id);
-            return response()->json([$sede, 200]);
+            return response()->json($sede, 200);
         }catch(\Exception $e){
             return response()->json([
                 'message' => 'Error al obtener la sede', 'error' => $e->getMessage()
