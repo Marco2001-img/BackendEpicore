@@ -15,9 +15,9 @@ use App\Http\Controllers\TipoTicketController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+// Route::get('/user', function (Request $request) {
+//     return $request->user();
+// })->middleware('auth:sanctum');
 
 
 Route::prefix('admin')->group(function () {
@@ -97,16 +97,16 @@ Route::prefix('tickets')->group(function () {
 /**********************************************************/
 
 
-Route::get('/TodosMensajes', [MensajeController::class, 'index']); 
-Route::post('/crearMensajes', [MensajeController::class, 'store']);
-Route::put('/modificarMensajes/{id}', [MensajeController::class, 'update']);
-Route::get('/buscarMensaje/{id}', [MensajeController::class, 'show']);
-Route::delete('/eliminarMensajes/{id}', [MensajeController::class, 'destroy']);
+// Route::get('/TodosMensajes', [MensajeController::class, 'index']); 
+// Route::post('/crearMensajes', [MensajeController::class, 'store']);
+// Route::put('/modificarMensajes/{id}', [MensajeController::class, 'update']);
+// Route::get('/buscarMensaje/{id}', [MensajeController::class, 'show']);
+// Route::delete('/eliminarMensajes/{id}', [MensajeController::class, 'destroy']);
 
 
-Route::get('/TodosTipoTicket', [TipoTicketController::class, 'index']); 
-Route::post('/crearTipoTicket', [TipoTicketController::class, 'store']);
-Route::put('/modificarTipoTicket/{id}', [TipoTicketController::class, 'update']);
-Route::get('/buscarTipoTicket/{id}', [TipoTicketController::class, 'show']);
-Route::delete('/eliminarTipoTicket/{id}', [TipoTicketController::class, 'destroy']);
+// Route::get('/TodosTipoTicket', [TipoTicketController::class, 'index']); 
+// Route::post('/crearTipoTicket', [TipoTicketController::class, 'store']);
+// Route::put('/modificarTipoTicket/{id}', [TipoTicketController::class, 'update']);
+// Route::get('/buscarTipoTicket/{id}', [TipoTicketController::class, 'show']);
+// Route::delete('/eliminarTipoTicket/{id}', [TipoTicketController::class, 'destroy']);
 
